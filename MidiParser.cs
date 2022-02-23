@@ -151,7 +151,7 @@ namespace MidiPlayer
                     if (pressedKey.key == events[i].Event.Data[0])
                     {
                         // Add note to track
-                        parsedTrack.Notes.Add(new PlayNote(pressedKey.time, events[i].Event.Data[0], time - pressedKey.time));
+                        parsedTrack.Notes.Add(new Note(pressedKey.time, events[i].Event.Data[0], time - pressedKey.time));
                         // Key is no longer down
                         // Set to arbitrary info
                         pressedKey = (-1, 0);
@@ -168,7 +168,7 @@ namespace MidiPlayer
                         if (pressedKey.key == events[i].Event.Data[0])
                         {
                             // Add note to track
-                            parsedTrack.Notes.Add(new PlayNote(pressedKey.time, events[i].Event.Data[0], time - pressedKey.time));
+                            parsedTrack.Notes.Add(new Note(pressedKey.time, events[i].Event.Data[0], time - pressedKey.time));
                             // Key is no longer down
                             // Set to arbitrary info
                             pressedKey = (-1, 0);
@@ -181,7 +181,7 @@ namespace MidiPlayer
                         // Otherwise release key and press new key
                         else
                         {
-                            parsedTrack.Notes.Add(new PlayNote(pressedKey.time, pressedKey.key, time - pressedKey.time));
+                            parsedTrack.Notes.Add(new Note(pressedKey.time, pressedKey.key, time - pressedKey.time));
                             pressedKey = (events[i].Event.Data[0], time);
                         }
                     }

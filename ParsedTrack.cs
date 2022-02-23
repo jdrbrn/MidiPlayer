@@ -8,6 +8,6 @@ namespace MidiPlayer
 {
     internal class ParsedTrack
     {
-        public List<PlayNote> Notes = new List<PlayNote>();
+        public List<Note> Notes = new List<Note>();
     }
 }

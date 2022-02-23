@@ -27,7 +27,7 @@
             // Advance time to playback timestamp
             time = track.Notes[0].TimeStamp;
             // Add Note On for channel 1, Note ID, Velocity of 64
-            trackData.AddRange(new byte[] { 0x90, (byte)track.Notes[0].Note, 64 });
+            trackData.AddRange(new byte[] { 0x90, (byte)track.Notes[0].NoteNum, 64 });
             // status IDs can be skipped now by using running status to play/stop notes
             // Turn off first note
             // Add time note is held to clock
@@ -35,7 +35,7 @@
             // Add length from data transformed into Delta-T ticks and encoded into variable length
             trackData.AddRange(MidiFile.encodeVaribleLength((uint)(track.Notes[0].Length * 1000.0 * division / tempo)));
             // Add Note ID, and velocity of 0
-            trackData.AddRange(new byte[] { (byte)track.Notes[0].Note, 0 });
+            trackData.AddRange(new byte[] { (byte)track.Notes[0].NoteNum, 0 });
 
             // Add info to play rest of notes using running status
             for (int i=1;i<track.Notes.Count;i++)
@@ -50,11 +50,11 @@
                 // Add delay as Delta-T ticks for time to play
                 trackData.AddRange(MidiFile.encodeVaribleLength((uint)(delay * 1000.0 * division / tempo)));
                 // Add Note ID, Velocity of 64
-                trackData.AddRange(new byte[] { (byte)track.Notes[i].Note, 64 });
+                trackData.AddRange(new byte[] { (byte)track.Notes[i].NoteNum, 64 });
                 // Add length from data transformed into Delta-T ticks and encoded into variable length
                 trackData.AddRange(MidiFile.encodeVaribleLength((uint)(track.Notes[i].Length * 1000.0 * division / tempo)));
                 // Add Note ID, and velocity of 0
-                trackData.AddRange(new byte[] {(byte)track.Notes[i].Note, 0 });
+                trackData.AddRange(new byte[] {(byte)track.Notes[i].NoteNum, 0 });
                 // Add time held to clock
                 time += track.Notes[i].Length;
             }
