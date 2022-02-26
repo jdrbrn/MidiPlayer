@@ -2,9 +2,15 @@
 {
     internal class MidiFile : IOutput
     {
+        string outputFile;
+
+        public MidiFile(string outputLocation)
+        {
+            outputFile = outputLocation;
+        }
+
         public void Output(ParsedTrack track)
         {
-            string outputFile = @"../../../output.mid";
             List<byte> outputData = new List<byte>();
 
             // Keep track of timing
@@ -78,6 +84,7 @@
 
 
             // Write to file
+            Console.WriteLine("Writing file " + outputFile);
             System.IO.File.WriteAllBytes(outputFile, outputData.ToArray());
         }
 
