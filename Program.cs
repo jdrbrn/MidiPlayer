@@ -1,8 +1,16 @@
-﻿string inputFile = @"../../../input.mid";
+﻿string inputFile;
+
+if (args.Count() > 0) inputFile = args[0];
+else
+{
+    Console.WriteLine("Run with argument to midi file");
+    return;
+}
+
 Console.WriteLine("Opening file input.mid");
 if (!File.Exists(inputFile))
 {
-    Console.WriteLine("File doesn't exist");
+    Console.WriteLine("File " + inputFile + " not found");
     return;
 }
 Console.WriteLine("File Found");
