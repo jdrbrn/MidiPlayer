@@ -1,8 +1,13 @@
-﻿namespace MidiPlayer.Outputs
+﻿using System.Diagnostics;
+
+namespace MidiPlayer.Outputs
 {
     internal abstract class ToneGenerator : IOutput
     {
         protected Dictionary<int, int> _frequencies = new Dictionary<int, int>();
+        protected Stopwatch _stopwatch = new Stopwatch();
+        // Stopwatch Frequency in ticks/second  / 1000 ms = ticks/ms
+        protected double ticksPerMS = Stopwatch.Frequency / 1000.0;
 
         public void Output(ParsedTrack track)
         {
@@ -41,6 +46,16 @@
 
             }
             return _frequencies[note];
+        }
+
+        // Wait for time in ms
+        protected void Wait(double time)
+        {
+            double waitTime = ticksPerMS * time;
+            _stopwatch.Start();
+            // Do nothing while waiting
+            while (_stopwatch.ElapsedTicks < (int)waitTime) ;
+            _stopwatch.Reset();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MidiPlayer.Outputs
         {
             softwarePwmChannel.Frequency = GetFrequency(note.NoteNum);
             softwarePwmChannel.Start();
-            Thread.Sleep((int)note.Length);
+            Wait(note.Length);
             softwarePwmChannel.Stop();
         }
     }
