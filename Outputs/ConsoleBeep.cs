@@ -1,6 +1,4 @@
-﻿using System.Timers;
-
-namespace MidiPlayer.Outputs
+﻿namespace MidiPlayer.Outputs
 {
     internal class ConsoleBeep : ToneGenerator
     {

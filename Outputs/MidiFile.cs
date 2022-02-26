@@ -15,7 +15,7 @@
             int division = 96;
 
             // Magic Header data for a type 0 Midi file with 1 track and setting division to 16
-            outputData.AddRange(new byte[] { 0x4d, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x01, 0x00, (byte)division});
+            outputData.AddRange(new byte[] { 0x4d, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x01, 0x00, (byte)division });
 
             // Create the main segment of the track based off the note data
             List<byte> trackData = new List<byte>();
@@ -38,7 +38,7 @@
             trackData.AddRange(new byte[] { (byte)track.Notes[0].NoteNum, 0 });
 
             // Add info to play rest of notes using running status
-            for (int i=1;i<track.Notes.Count;i++)
+            for (int i = 1; i < track.Notes.Count; i++)
             {
                 // Calculate delay before playing next note
                 double delay = 0;
@@ -54,7 +54,7 @@
                 // Add length from data transformed into Delta-T ticks and encoded into variable length
                 trackData.AddRange(MidiFile.encodeVaribleLength((uint)(track.Notes[i].Length * 1000.0 * division / tempo)));
                 // Add Note ID, and velocity of 0
-                trackData.AddRange(new byte[] {(byte)track.Notes[i].NoteNum, 0 });
+                trackData.AddRange(new byte[] { (byte)track.Notes[i].NoteNum, 0 });
                 // Add time held to clock
                 time += track.Notes[i].Length;
             }

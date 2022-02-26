@@ -1,6 +1,4 @@
-﻿using MidiPlayer.Outputs;
-
-namespace MidiPlayer
+﻿namespace MidiPlayer
 {
     internal class MidiParser
     {
@@ -23,7 +21,7 @@ namespace MidiPlayer
             // Otherwise flatten the single track to a tickstamped track
             else flatTrack = FlattenTrackChunk(midiData.TrackChunks[0]);
 
-            return ParseFlatTrack(midiData.Header , flatTrack);
+            return ParseFlatTrack(midiData.Header, flatTrack);
         }
 
         private List<StampedEvent> FlattenTrackChunk(Midi.TrackChunk track)
@@ -48,7 +46,7 @@ namespace MidiPlayer
 
         private List<StampedEvent> MergeFlatTrack(List<List<StampedEvent>> tracks)
         {
-            List<StampedEvent> output = new List<StampedEvent> ();
+            List<StampedEvent> output = new List<StampedEvent>();
 
             foreach (var track in tracks)
             {
@@ -84,7 +82,7 @@ namespace MidiPlayer
             // Swap bytes around for endianness if needed
             if (BitConverter.IsLittleEndian) Array.Reverse(rawDivision);
             // Get int value
-            int division = BitConverter.ToInt16( rawDivision, 0);
+            int division = BitConverter.ToInt16(rawDivision, 0);
 
             // Set tempo to default of 500000/120BPM
             int tempo = 500000;
@@ -135,7 +133,7 @@ namespace MidiPlayer
                     {
                         Console.WriteLine("Ignoring non-Meta Event w/ ID " + Convert.ToString(events[i].Event.StatusID, toBase: 16));
                         Console.Write("Data: ");
-                        foreach (byte b in events[i].Event.Data) Console.Write(Convert.ToString(b, toBase: 16)+" ");
+                        foreach (byte b in events[i].Event.Data) Console.Write(Convert.ToString(b, toBase: 16) + " ");
                         Console.WriteLine();
                     }
                     continue;

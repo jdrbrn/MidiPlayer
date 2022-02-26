@@ -2,7 +2,7 @@
 {
     internal record Event
     {
-        public byte StatusID { get;  }
+        public byte StatusID { get; }
         public byte[] Data { get; }
 
         public Event(byte id, byte[] data)

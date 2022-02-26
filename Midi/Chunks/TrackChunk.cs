@@ -91,7 +91,7 @@
                 // Move index to after the MTrkEvent and return new value
                 return index += sysexDataLength;
             }
-            
+
             // meta-event
             if (status == 0xFF)
             {
