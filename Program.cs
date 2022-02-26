@@ -5,7 +5,7 @@ Dictionary<string, Func<MidiPlayer.Output.IOutput>> outputs = new Dictionary<str
 {
     ["MidiFile"] = new Func<MidiPlayer.Output.IOutput>(() => new MidiPlayer.Output.MidiFile("output.mid")),
     ["ConsoleBeep"] = new Func<MidiPlayer.Output.IOutput>(() => new MidiPlayer.Output.ConsoleBeep()),
-    ["PassiveBuzzer"] = new Func<MidiPlayer.Output.IOutput>(() => new MidiPlayer.Output.PassiveBuzzer(18))
+    ["PassiveBuzzer"] = new Func<MidiPlayer.Output.IOutput>(() => new MidiPlayer.Output.PassiveBuzzer(18)),
 };
 
 if (args.Count() < 2)
