@@ -13,21 +13,21 @@ namespace MidiPlayer.Outputs
         {
             Console.WriteLine("Playing song...");
             // Keep track of time
-            int time = 0;
+            int ticks = 0;
             // Iternate over notes
             for (int i = 0; i < track.Notes.Count; i++)
             {
-                // Convert timestamp and length to int for ease of use
-                int timestamp = (int)track.Notes[i].TimeStamp;
-                int length = (int)track.Notes[i].Length;
-                // Sleep until we hit timestamp
-                Thread.Sleep(timestamp - time);
-                // Update time to be at timestamp
-                time = timestamp;
+                // Convert timestamp and length to be tick based
+                int tickstamp = (int)(track.Notes[i].TimeStamp*ticksPerMS);
+                int length = (int)(track.Notes[i].Length*ticksPerMS);
+                // Wait until we hit tickstamp
+                Wait(tickstamp - ticks);
+                // Update ticks to be at tickstamp
+                ticks = tickstamp;
                 // Play note if valid
                 if (track.Notes[i].Length > 0) PlayNote(track.Notes[i]);
-                // Update time to be after playing note
-                time += length;
+                // Update ticks to be after playing note
+                ticks += length;
             }
             Console.WriteLine("Done");
         }
