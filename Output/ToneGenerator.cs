@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace MidiPlayer.Outputs
+namespace MidiPlayer.Output
 {
     internal abstract class ToneGenerator : IOutput
     {

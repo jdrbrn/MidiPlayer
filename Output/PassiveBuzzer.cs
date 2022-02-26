@@ -1,7 +1,7 @@
 ﻿using System.Device.Pwm.Drivers;
 // Requires libgpiod-dev package
 
-namespace MidiPlayer.Outputs
+namespace MidiPlayer.Output
 {
     internal class PassiveBuzzer : ToneGenerator
     {
