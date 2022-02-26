@@ -51,10 +51,15 @@ namespace MidiPlayer.Outputs
         // Wait for time in ms
         protected void Wait(double time)
         {
-            double waitTime = ticksPerMS * time;
+            Wait((int)(ticksPerMS * time));
+        }
+        
+        // Wait for time in ticks
+        protected void Wait(int ticks)
+        {
             _stopwatch.Start();
             // Do nothing while waiting
-            while (_stopwatch.ElapsedTicks < (int)waitTime) ;
+            while (_stopwatch.ElapsedTicks < ticks) ;
             _stopwatch.Reset();
         }
     }
