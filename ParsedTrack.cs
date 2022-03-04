@@ -2,6 +2,6 @@
 {
     internal class ParsedTrack
     {
-        public List<Note> Notes = new List<Note>();
+        public List<Note> Notes = new();
     }
 }

@@ -2,7 +2,7 @@
 {
     internal class MidiFile : IOutput
     {
-        string outputFile;
+        readonly string outputFile;
 
         public MidiFile(string outputLocation)
         {
@@ -11,10 +11,10 @@
 
         public void Output(ParsedTrack track)
         {
-            List<byte> outputData = new List<byte>();
+            List<byte> outputData = new();
 
             // Keep track of timing
-            double time = 0;
+            double time;
             // Midi's default tempo so we shouldn't need to specify in the file
             int tempo = 500000;
             // Division value we're setting in the header
@@ -24,12 +24,12 @@
             outputData.AddRange(new byte[] { 0x4d, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x01, 0x00, (byte)division });
 
             // Create the main segment of the track based off the note data
-            List<byte> trackData = new List<byte>();
+            List<byte> trackData = new();
 
             // Add info to play first note
             // Send Delta-Time of when to start
             // Need to convert from milliseconds to delta-t ticks reversing the equation in Midi File specs and then encode to variable length
-            trackData.AddRange(MidiFile.encodeVaribleLength((uint)(track.Notes[0].TimeStamp * 1000.0 * division / tempo)));
+            trackData.AddRange(MidiFile.EncodeVaribleLength((uint)(track.Notes[0].TimeStamp * 1000.0 * division / tempo)));
             // Advance time to playback timestamp
             time = track.Notes[0].TimeStamp;
             // Add Note On for channel 1, Note ID, Velocity of 64
@@ -39,7 +39,7 @@
             // Add time note is held to clock
             time += track.Notes[0].Length;
             // Add length from data transformed into Delta-T ticks and encoded into variable length
-            trackData.AddRange(MidiFile.encodeVaribleLength((uint)(track.Notes[0].Length * 1000.0 * division / tempo)));
+            trackData.AddRange(MidiFile.EncodeVaribleLength((uint)(track.Notes[0].Length * 1000.0 * division / tempo)));
             // Add Note ID, and velocity of 0
             trackData.AddRange(new byte[] { (byte)track.Notes[0].NoteNum, 0 });
 
@@ -54,11 +54,11 @@
                 time = track.Notes[i].TimeStamp;
 
                 // Add delay as Delta-T ticks for time to play
-                trackData.AddRange(MidiFile.encodeVaribleLength((uint)(delay * 1000.0 * division / tempo)));
+                trackData.AddRange(MidiFile.EncodeVaribleLength((uint)(delay * 1000.0 * division / tempo)));
                 // Add Note ID, Velocity of 64
                 trackData.AddRange(new byte[] { (byte)track.Notes[i].NoteNum, 64 });
                 // Add length from data transformed into Delta-T ticks and encoded into variable length
-                trackData.AddRange(MidiFile.encodeVaribleLength((uint)(track.Notes[i].Length * 1000.0 * division / tempo)));
+                trackData.AddRange(MidiFile.EncodeVaribleLength((uint)(track.Notes[i].Length * 1000.0 * division / tempo)));
                 // Add Note ID, and velocity of 0
                 trackData.AddRange(new byte[] { (byte)track.Notes[i].NoteNum, 0 });
                 // Add time held to clock
@@ -68,7 +68,7 @@
             trackData.AddRange(new byte[] { 0x00, 0xff, 0x2f, 0x00 });
 
             // Create Header data for track
-            List<byte> trackHeader = new List<byte>();
+            List<byte> trackHeader = new();
             // Add header ID
             trackHeader.AddRange(new byte[] { (byte)'M', (byte)'T', (byte)'r', (byte)'k' });
             // Get data length
@@ -88,9 +88,9 @@
             System.IO.File.WriteAllBytes(outputFile, outputData.ToArray());
         }
 
-        private static byte[] encodeVaribleLength(uint input)
+        private static byte[] EncodeVaribleLength(uint input)
         {
-            List<byte> result = new List<byte>();
+            List<byte> result = new();
             do
             {
                 byte temp = (byte)input;
@@ -101,7 +101,7 @@
                 // Add byte to result
                 result.Add(temp);
                 // Shift down 7 bits to get next segment
-                input = input >> 7;
+                input >>= 7;
             } while (input > 0);
 
             //Reverse to have proper significance

@@ -32,7 +32,7 @@
             // copy variable length data to array for parsing
             byte[] deltaTVaribleLength = new byte[deltaTLength];
             Array.Copy(Data, index, deltaTVaribleLength, 0, deltaTLength);
-            int deltaT = MidiParser.decodeVariableLength(deltaTVaribleLength);
+            int deltaT = MidiParser.DecodeVariableLength(deltaTVaribleLength);
 
             // Move index to after dt
             index += deltaTLength;
@@ -77,7 +77,7 @@
                 // copy variable length data to array for parsing
                 byte[] sysexDataLengthVaribleLength = new byte[sysexlengthLength];
                 Array.Copy(Data, index, sysexDataLengthVaribleLength, 0, sysexlengthLength);
-                int sysexDataLength = MidiParser.decodeVariableLength(sysexDataLengthVaribleLength);
+                int sysexDataLength = MidiParser.DecodeVariableLength(sysexDataLengthVaribleLength);
 
                 // move index to start of sysex data
                 index += sysexlengthLength;
@@ -110,7 +110,7 @@
                 // copy variable length data to array for parsing
                 byte[] metadataLengthVaribleLength = new byte[metadatalengthLength];
                 Array.Copy(Data, index, metadataLengthVaribleLength, 0, metadatalengthLength);
-                int metadataLength = MidiParser.decodeVariableLength(metadataLengthVaribleLength);
+                int metadataLength = MidiParser.DecodeVariableLength(metadataLengthVaribleLength);
 
                 // move index to start of sysex data
                 index += metadatalengthLength;

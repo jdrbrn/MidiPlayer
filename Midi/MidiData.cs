@@ -23,7 +23,7 @@ namespace MidiPlayer
             // Get the chunk header from the raw bytes
             char[] chunkHeaderBytes = new char[4];
             Array.Copy(input, 0, chunkHeaderBytes, 0, 4);
-            string chunkHeader = new string(chunkHeaderBytes);
+            string chunkHeader = new(chunkHeaderBytes);
             // Get the bytes representing the length of the chunk
             byte[] lengthBytes = new byte[4];
             Array.Copy(input, 0 + 4, lengthBytes, 0, 4);
@@ -48,7 +48,7 @@ namespace MidiPlayer
                 // Get the chunk header from the raw bytes
                 char[] chunkHeaderBytes = new char[4];
                 Array.Copy(input, i, chunkHeaderBytes, 0, 4);
-                string chunkHeader = new string(chunkHeaderBytes);
+                string chunkHeader = new(chunkHeaderBytes);
                 // Get the bytes representing the length of the chunk
                 byte[] lengthBytes = new byte[4];
                 Array.Copy(input, i + 4, lengthBytes, 0, 4);

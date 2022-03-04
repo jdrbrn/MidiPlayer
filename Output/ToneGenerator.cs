@@ -5,9 +5,9 @@ namespace MidiPlayer.Output
     internal abstract class ToneGenerator : IOutput
     {
         // Dictionary to cache frequencies
-        protected Dictionary<int, int> _frequencies = new Dictionary<int, int>();
+        protected Dictionary<int, int> _frequencies = new();
         // Stopwatch to time events
-        protected Stopwatch _stopwatch = new Stopwatch();
+        protected Stopwatch _stopwatch = new();
         // Stopwatch Frequency in ticks/second  / 1000 ms = ticks/ms
         protected double ticksPerMS = Stopwatch.Frequency / 1000.0;
 

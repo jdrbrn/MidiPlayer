@@ -5,7 +5,7 @@ namespace MidiPlayer.Output
     internal class PassiveBuzzer : ToneGenerator
     {
         GpioController controller;
-        int outputPin;
+        readonly int outputPin;
 
         public PassiveBuzzer(int pin) : base()
         {

@@ -5,9 +5,9 @@
         public ParsedTrack ParseData(byte[] input)
         {
             // Parse the raw data into a useable format
-            MidiData midiData = new MidiData(input);
+            MidiData midiData = new(input);
             // Only deal with one music track right now
-            List<StampedEvent> flatTrack = new List<StampedEvent>();
+            List<StampedEvent> flatTrack;
 
             // If more than one track combine the first + second since first should be tempo/pacing data
             if (midiData.TrackChunks.Count > 1)
@@ -30,7 +30,7 @@
             // Get list of mTrkEvnts
             List<Midi.MTrkEvent> midiEvents = track.mTrkEvents;
             // Create list for output
-            List<StampedEvent> stampedEvents = new List<StampedEvent>();
+            List<StampedEvent> stampedEvents = new();
 
             // Keep track of cumulative ticks
             int tickCount = 0;
@@ -47,7 +47,7 @@
 
         private List<StampedEvent> MergeFlatTrack(List<List<StampedEvent>> tracks)
         {
-            List<StampedEvent> output = new List<StampedEvent>();
+            List<StampedEvent> output = new();
 
             // Add each track's data to the cummulative output list
             foreach (var track in tracks)
@@ -95,7 +95,7 @@
             // Use -1 as invalid key
             (int key, double time) pressedKey = (-1, 0);
 
-            ParsedTrack parsedTrack = new ParsedTrack();
+            ParsedTrack parsedTrack = new();
 
             for (int i = 0; i < events.Count; i++)
             {
@@ -193,7 +193,7 @@
             return parsedTrack;
         }
 
-        public static int decodeVariableLength(byte[] input)
+        public static int DecodeVariableLength(byte[] input)
         {
             // Temp value to store concat result that will be split to bytes later
             int concatResult = 0;
