@@ -17,7 +17,13 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Remove="input.mid" />
+    <None Remove="output.mid" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="Iot.Device.Bindings" Version="2.0.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />
   </ItemGroup>
 
 </Project>
