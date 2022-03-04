@@ -4,11 +4,12 @@
     {
         public ParsedTrack ParseData(byte[] input)
         {
+            // Parse the raw data into a useable format
             MidiData midiData = new MidiData(input);
             // Only deal with one music track right now
             List<StampedEvent> flatTrack = new List<StampedEvent>();
 
-            // If more than one track combine the first + second since first is likely tempo/pacing data
+            // If more than one track combine the first + second since first should be tempo/pacing data
             if (midiData.TrackChunks.Count > 1)
             {
                 // Flatten tempo data to tickstamped track
@@ -48,12 +49,15 @@
         {
             List<StampedEvent> output = new List<StampedEvent>();
 
+            // Add each track's data to the cummulative output list
             foreach (var track in tracks)
             {
                 output.AddRange(track);
             }
 
+            // Sort by tickstamp
             output.Sort(CompareStampedEvents);
+
             return output;
         }
 
