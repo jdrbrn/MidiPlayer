@@ -1,6 +1,6 @@
-﻿namespace MidiPlayer.Output
+﻿namespace MidiPlayer.OutputModule
 {
-    internal class MidiFile : IOutput
+    internal class MidiFile : IOutputModule
     {
         readonly string outputFile;
 

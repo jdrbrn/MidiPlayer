@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-namespace MidiPlayer.Output
+namespace MidiPlayer.OutputModule
 {
-    internal abstract class ToneGenerator : IOutput
+    internal abstract class ToneGenerator : IOutputModule
     {
         // Dictionary to cache frequencies
         protected Dictionary<int, int> _frequencies = new();

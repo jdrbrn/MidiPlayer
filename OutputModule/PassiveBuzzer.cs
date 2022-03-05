@@ -1,6 +1,6 @@
 ﻿using System.Device.Gpio;
 
-namespace MidiPlayer.Output
+namespace MidiPlayer.OutputModule
 {
     internal class PassiveBuzzer : ToneGenerator
     {

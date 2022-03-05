@@ -1,6 +1,6 @@
-﻿namespace MidiPlayer.Output
+﻿namespace MidiPlayer.OutputModule
 {
-    internal interface IOutput
+    internal interface IOutputModule
     {
         public void Output(MidiPlayer.ParsedTrack track);
     }

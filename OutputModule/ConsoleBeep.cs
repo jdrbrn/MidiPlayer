@@ -1,4 +1,4 @@
-﻿namespace MidiPlayer.Output
+﻿namespace MidiPlayer.OutputModule
 {
     internal class ConsoleBeep : ToneGenerator
     {

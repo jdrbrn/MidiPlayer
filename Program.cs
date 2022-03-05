@@ -4,10 +4,10 @@ MidiPlayer.Config config;
 // Dictionary acts as a converter from string to an Output Module
 // (Eventually move out to a different class)
 // Each delegate function also checks for the arguments needed for each Output Module
-Dictionary<string, Func<string[], MidiPlayer.Output.IOutput>> outputs = new()
+Dictionary<string, Func<string[], MidiPlayer.OutputModule.IOutputModule>> outputs = new()
 {
     // Takes one argument as the name of the output file
-    ["MidiFile"] = new Func<string[], MidiPlayer.Output.IOutput>((string[] args) => {
+    ["MidiFile"] = new Func<string[], MidiPlayer.OutputModule.IOutputModule>((string[] args) => {
         string outputFile;
         if (args.Length > 1) Console.WriteLine("Warning: Extraneous arguments passed to output module MidiFile, ignoring...");
         if (args.Length > 0) outputFile = args[0];
@@ -16,18 +16,18 @@ Dictionary<string, Func<string[], MidiPlayer.Output.IOutput>> outputs = new()
             Console.WriteLine("Warning: No argument passed to output module MidiFile, using default output file(output.mid)");
             outputFile = "output.mid";
         }
-        return new MidiPlayer.Output.MidiFile(outputFile);
+        return new MidiPlayer.OutputModule.MidiFile(outputFile);
     }),
     // Takes 0 arguments
     // Also check if on Windows as ConsoleBeep isn't supported on any other platforms
-    ["ConsoleBeep"] = new Func<string[], MidiPlayer.Output.IOutput>((string[] args) => {
+    ["ConsoleBeep"] = new Func<string[], MidiPlayer.OutputModule.IOutputModule>((string[] args) => {
         if (args.Length > 0) Console.WriteLine("Warning: Extraneous arguments passed to output module ConsoleBeep, ignoring...");
         // Check if running on Windows
         if (!System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows)) throw new Exception("Error: Can only use ConsoleBeep output module on Windows");
-        return new MidiPlayer.Output.ConsoleBeep();
+        return new MidiPlayer.OutputModule.ConsoleBeep();
     }),
     // Needs one argmuent for the GPIO Pin number
-    ["PassiveBuzzer"] = new Func<string[], MidiPlayer.Output.IOutput>((string[] args) => {
+    ["PassiveBuzzer"] = new Func<string[], MidiPlayer.OutputModule.IOutputModule>((string[] args) => {
         int pin;
         if (args.Length > 1) Console.WriteLine("Warning: Extraneous arguments passed to output module PassiveBuzzer, ignoring...");
         if (args.Length > 0)
@@ -38,7 +38,7 @@ Dictionary<string, Func<string[], MidiPlayer.Output.IOutput>> outputs = new()
         {
             throw new Exception("Error: No pin number passed for PassiveBuzzer output module");
         }
-        return new MidiPlayer.Output.PassiveBuzzer(pin);
+        return new MidiPlayer.OutputModule.PassiveBuzzer(pin);
     }),
 };
 
@@ -84,7 +84,7 @@ else
 }
 
 // Create output module from the data found in the config file
-MidiPlayer.Output.IOutput outputModule = outputs[config.OutputChannels[0].OutputModule](config.OutputChannels[0].Args);
+MidiPlayer.OutputModule.IOutputModule outputModule = outputs[config.OutputChannels[0].OutputModule](config.OutputChannels[0].Args);
 
 Console.WriteLine("Opening file " + inputFile);
 byte[] inputData = System.IO.File.ReadAllBytes(inputFile);
