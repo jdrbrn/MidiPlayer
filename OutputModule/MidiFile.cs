@@ -4,9 +4,9 @@
     {
         readonly string outputFile;
 
-        public MidiFile(string outputLocation)
+        public MidiFile(string FileName)
         {
-            outputFile = outputLocation;
+            outputFile = FileName;
         }
 
         public void Output(ParsedTrack track)

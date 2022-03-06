@@ -7,10 +7,10 @@ namespace MidiPlayer.OutputModule
         GpioController controller;
         readonly int outputPin;
 
-        public PassiveBuzzer(int pin) : base()
+        public PassiveBuzzer(int Pin) : base()
         {
             // Store output pin number
-            outputPin = pin;
+            outputPin = Pin;
             controller = new GpioController();
             // Set output pin to output mode
             controller.OpenPin(outputPin, PinMode.Output);

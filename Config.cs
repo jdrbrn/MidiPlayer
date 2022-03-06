@@ -4,11 +4,11 @@ namespace MidiPlayer
 {
     internal class Config
     {
-        public OutputChannel[] OutputChannels { get; set; }
+        public ChannelConfiguration[] OutputChannelConfiguration { get; set; }
 
-        public Config(OutputChannel[] outputChannels) 
+        public Config(ChannelConfiguration[] outputChannelConfiguration) 
         {
-            OutputChannels = outputChannels;
+            OutputChannelConfiguration = outputChannelConfiguration;
         }
 
         // Returns a default config based around a single channel MidiFile output
@@ -16,12 +16,12 @@ namespace MidiPlayer
         {
             return new Config
             (
-                new OutputChannel[]
+                new ChannelConfiguration[]
                 {
-                    new OutputChannel()
+                    new ChannelConfiguration()
                     {
                         OutputModule = "MidiFile",
-                        Args = new string[] { "output.mid" }
+                        Args = new Dictionary<string, string> { ["FileName"] = "output.mid" }
                     }
                 }
             );
@@ -39,12 +39,6 @@ namespace MidiPlayer
 
             string jsonString = File.ReadAllText(file);
             return JsonSerializer.Deserialize<Config>(jsonString)!;
-        }
-
-        public struct OutputChannel
-        {
-            public string OutputModule { get; set; }
-            public string[] Args { get; set; }
         }
     }
 }

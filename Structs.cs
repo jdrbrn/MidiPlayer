@@ -16,4 +16,10 @@
             Length = len;
         }
     }
+
+    internal struct ChannelConfiguration
+    {
+        public string OutputModule { get; set; }
+        public Dictionary<string, string> Args { get; set; }
+    }
 }
