@@ -20,7 +20,6 @@ namespace MidiPlayer.OutputModule
         {
             // Get freq of note
             int freq = GetFrequency(note.NoteNum);
-            Console.WriteLine(freq);
             // Get length of playback in ticks
             int length = (int)(note.Length * ticksPerMS);
             // Convert freq (pulse/second) to pulse per ms
