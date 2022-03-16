@@ -29,7 +29,8 @@ namespace MidiPlayer
 
         public static void SaveConfig(Config config, string file)
         {
-            string jsonString = JsonSerializer.Serialize(config);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(config, options);
             File.WriteAllText(file, jsonString);
         }
 
