@@ -23,6 +23,8 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
     <None Remove="input.mid" />
     <None Remove="output.mid" />
   </ItemGroup>
