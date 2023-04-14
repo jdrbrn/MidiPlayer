@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Device.Gpio;
+using System.Diagnostics;
 
 namespace MidiPlayer.OutputModule
 {
@@ -34,7 +35,7 @@ namespace MidiPlayer.OutputModule
             Console.WriteLine("Done");
         }
 
-        protected abstract void PlayNote(MidiPlayer.Note note);
+        protected abstract void PlayNote(Note note);
 
         // Return frequency in Hz for a given note by Midi number
         protected int GetFrequency(int note)
