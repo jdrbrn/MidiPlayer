@@ -26,7 +26,8 @@ namespace MidiPlayer
             {
                 ["MidiFile"] = typeof(MidiPlayer.OutputModule.MidiFile),
                 ["ConsoleBeep"] = typeof(MidiPlayer.OutputModule.ConsoleBeep),
-                ["PassiveBuzzer"] = typeof(MidiPlayer.OutputModule.PassiveBuzzer)
+                ["PassiveBuzzer"] = typeof(MidiPlayer.OutputModule.PassiveBuzzer),
+                ["FloppyDrive"] = typeof(MidiPlayer.OutputModule.FloppyDrive)
             };
 
             // Check if config file is calling for a non-existant module
